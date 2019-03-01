@@ -6,6 +6,13 @@ exports.up = function(knex, Promise) {
 
     tbl.text("notes").notNullable();
 
+    tbl
+      .integer("project_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("projects");
+
     tbl.boolean("completed").defaultTo("false");
 
     tbl.timestamps(true, true);
