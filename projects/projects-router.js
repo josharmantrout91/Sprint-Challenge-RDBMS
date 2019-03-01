@@ -49,5 +49,23 @@ router.post("/actions", (req, res) => {
 });
 
 // GET project by id with list of actions in that project
+router.get("/projects/:id", (req, res) => {
+  id = req.params.id;
+  db("projects")
+    .where({ id })
+    .first()
+    .then(project => {
+      db("actions")
+        .where({ project_id: id })
+        .then(actions => {
+          project.actions = actions;
+          res.status(200).json(project);
+        })
+        .catch(error => console.log(error));
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 module.exports = router;
