@@ -68,4 +68,34 @@ router.get("/projects/:id", (req, res) => {
     });
 });
 
+// ********** STRETCH CRUD METHODS ********** //
+
+// ***** READ METHODS ***** //
+
+// GET projects
+router.get("/projects", (req, res) => {
+  db("projects")
+    .then(projects => {
+      res.status(200).json(projects);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+// GET actions
+router.get("/actions", (req, res) => {
+  db("actions")
+    .then(actions => {
+      res.status(200).json(actions);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+// ***** UPDATE METHODS ***** //
+
+// ***** DELETE METHODS ***** //
+
 module.exports = router;
